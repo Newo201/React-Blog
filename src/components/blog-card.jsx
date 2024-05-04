@@ -6,7 +6,6 @@ function BlogCard(props) {
   return (
     <div className="col d-flex align-items-stretch">
         <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={require(`../images/${props.imgName}.jpg`)} />
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>
             <Card.Text>
