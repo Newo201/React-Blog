@@ -2,17 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import BlogRow from './components/blog-row';
-import BlogTitle from './components/blog-title';
-import Hero from './components/hero';
+import Home from './Home';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <BlogTitle />
-      <BlogRow />
+      <Home />
       <Footer />
     </>
   );
