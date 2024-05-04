@@ -1,10 +1,10 @@
 import React from "react"
 import BlogCard from "./blog-card"
 
-const basePath = 'C:/Users/owenj/OneDrive/Programming/Web Design/2024/React/react-blog/react-blog-frontend/public/assets/images'
-const bloginfo = [{'imgURL': `${basePath}/behavioural.jpg`, 'title': 'Test', 'description': 'This is a test'},
-{'imgURL': `${basePath}/crypto.jpg`, 'title': 'Test', 'description': 'This is a test'},
-{'imgURL': `${basePath}/crypto.jpg`, 'title': 'Test', 'description': 'This is a test'}
+const bloginfo = [
+    {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'},
+    {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'},
+    {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'}
 ]
 
 function BlogRow() {
