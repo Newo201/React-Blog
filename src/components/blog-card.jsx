@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 function BlogCard(props) {
   return (
-    <div class="col d-flex align-items-stretch">
+    <div className="col d-flex align-items-stretch">
         <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={require(`../images/${props.imgName}.jpg`)} />
         <Card.Body>
