@@ -1,6 +1,7 @@
 import React from "react"
 import BlogCard from "./blog-card"
 
+// Replace with a database
 const bloginfo = [
     {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'},
     {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'},

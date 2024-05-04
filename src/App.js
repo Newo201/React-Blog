@@ -3,13 +3,17 @@ import './App.css';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './Home';
-import Hero from './components/hero';
+import { Route, Routes } from 'react-router-dom';
+import Blog from './Blog';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
+      <Routes>
+        <Route path = "/" element = {<Home/ >} />
+        <Route path = "/blog" element = {<Blog/ >} />
+      </Routes>
       <Footer />
     </>
   );
