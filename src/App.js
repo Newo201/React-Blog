@@ -4,16 +4,17 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import BlogRow from './components/blog-row';
 import BlogTitle from './components/blog-title';
-
+import Hero from './components/hero';
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
+      <Hero />
       <BlogTitle />
       <BlogRow />
       <Footer />
-    </div>
+    </>
   );
 }
 
