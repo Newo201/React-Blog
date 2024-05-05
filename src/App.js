@@ -18,6 +18,7 @@ function App() {
         <Route path = "/" element = {<Home/ >} />
         <Route path = "/blog" element = {<Blog/ >} />
         <Route path = "/blog/new" element = {<BlogEntry/>} />
+        <Route path = "/blog/edit/:id" element = {<BlogEntry/>} />
       </Routes>
       <Footer />
     </>

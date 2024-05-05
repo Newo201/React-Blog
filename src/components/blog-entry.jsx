@@ -1,23 +1,48 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 // Replace with database query
 const categories = ["Economics", "Finance", "Statistics"]
 
-function BlogEntry() {
+function BlogEntry(props) {
+
+  const { id } = useParams()
+
+  const [isUpdate, setIsUpdate] = useState(false)
 
   const [blogInfo, setBlogInfo] = useState({
     "title": "", 
     "category": "", 
     "description": "", 
-    "content": ""
+    "article": ""
   })
+
+  useEffect(() => {
+
+    (async () => {
+      if (id) {
+        const response = await axios.get(`/blogs/${id}`)
+        console.log(response)
+        setBlogInfo(response.data)
+        setIsUpdate(true)
+      }
+    })
+    
+    ();
+
+  }, [])
 
   async function addBlog() {
     console.log(blogInfo)
     const response = await axios.post("/blogs/new", blogInfo)
+  }
+
+  async function updateBlog() {
+    console.log(blogInfo)
+    const response = await axios.put(`/blogs/${id}`, blogInfo)
   }
 
   function updateForm(event) {
@@ -59,12 +84,12 @@ function BlogEntry() {
             <Form.Label>Blog Description</Form.Label>
             <Form.Control onChange = {updateForm} name = "description" as="textarea" rows={3} value = {blogInfo.description}/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="Blog Content">
-            <Form.Label>Blog Content</Form.Label>
-            <Form.Control onChange = {updateForm} name = "content" as="textarea" rows={10} value = {blogInfo.content}/>
+        <Form.Group className="mb-3" controlId="Blog article">
+            <Form.Label>Blog article</Form.Label>
+            <Form.Control onChange = {updateForm} name = "article" as="textarea" rows={10} value = {blogInfo.article}/>
         </Form.Group>
         </Form>
-        <Button onClick = {addBlog}>Submit</Button>
+        {isUpdate ?<Button onClick = {updateBlog}>Update</Button> :<Button onClick = {addBlog}>Submit</Button> }
     </div>
   );
 }
