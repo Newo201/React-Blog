@@ -6,6 +6,7 @@ import Home from './Home';
 import { Route, Routes } from 'react-router-dom';
 import Blog from './Blog';
 import { useState, useEffect } from 'react';
+import BlogEntry from './components/blog-entry';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {<Home/ >} />
         <Route path = "/blog" element = {<Blog/ >} />
+        <Route path = "/blog/new" element = {<BlogEntry/>} />
       </Routes>
       <Footer />
     </>
