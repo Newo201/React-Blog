@@ -19,7 +19,7 @@ function Home() {
     useEffect(() => {
 
         (async () => {
-            const response = await axios.get("/featured")
+            const response = await axios.get("blogs/featured")
             console.log(response)
             setBlogInfo(response.data)
         })

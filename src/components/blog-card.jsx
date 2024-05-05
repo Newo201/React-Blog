@@ -11,7 +11,9 @@ function BlogCard(props) {
             <Card.Text>
             {props.description}
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button className = "mx-1" variant="primary">Read Blog</Button>
+            <Button className = "mx-1" variant="primary">Edit</Button>
+            <Button className = "mx-1" variant="primary">Delete</Button>
         </Card.Body>
         </Card>
     </div>
