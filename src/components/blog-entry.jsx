@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+// import BlogCategories from './blog-categories';
 
 // Replace with database query
 const categories = ["Economics", "Finance", "Statistics"]
@@ -15,6 +16,7 @@ function BlogEntry(props) {
 
   const [blogInfo, setBlogInfo] = useState({
     "title": "", 
+    "cat_id": 0,
     "category": "", 
     "description": "", 
     "article": ""
@@ -47,16 +49,13 @@ function BlogEntry(props) {
 
   function updateForm(event) {
     const {name, value} = event.target
+    console.log(name)
     setBlogInfo(prevValue => {
         return ({...prevValue, [name]: value})
-        // if (name === 'categories') {
-        //     return ({...prevValue, "category"})
-        // } else {
-        //     return ({...prevValue, [name]: value})
-        // }
-        
     })
   }
+
+  console.log(blogInfo.cat_id)
 
   return (
     <div className = "container mt-5">
@@ -66,19 +65,21 @@ function BlogEntry(props) {
             <Form.Control onChange = {updateForm} name="title" placeholder="Blog Title" value = {blogInfo.title}/>
         </Form.Group>
         <Form.Group className = "mb-3" controlId = "Category">
-            <Form.Label>Blog Category</Form.Label>
-            {categories.map((category, index) => {
-                return (
-                    <Form.Check // prettier-ignore
-                    key = {index}
-                    onChange = {updateForm}
-                    type="radio"
-                    name = "category"
-                    value={category}
-                    label={category}
-                    />
-                )
-            })}
+        <Form.Label>Blog Category</Form.Label>
+        {categories.map((category, index) => {
+            return (
+                <Form.Check // prettier-ignore
+                key = {index}
+                onChange = {updateForm}
+                type="radio"
+                name = "category"
+                value={category}
+                label={category}
+                // isValid = {blogInfo.cat_id === 2}
+                checked = {blogInfo.category === category}
+                />
+            )
+        })}
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>
