@@ -2,13 +2,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import BlogCategories from './blog-categories';
 
 // Replace with database query
 const categories = ["Economics", "Finance", "Statistics"]
 
-function BlogEntry(props) {
+function BlogEntry() {
+
+  const navigate = useNavigate()
 
   const { id } = useParams()
 
@@ -39,12 +41,14 @@ function BlogEntry(props) {
 
   async function addBlog() {
     console.log(blogInfo)
-    const response = await axios.post("/blogs/new", blogInfo)
+    await axios.post("/blogs/new", blogInfo)
+    navigate(-1)
   }
 
   async function updateBlog() {
     console.log(blogInfo)
-    const response = await axios.put(`/blogs/${id}`, blogInfo)
+    await axios.put(`/blogs/${id}`, blogInfo)
+    navigate(-1)
   }
 
   function updateForm(event) {

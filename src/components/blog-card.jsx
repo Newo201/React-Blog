@@ -7,13 +7,14 @@ function BlogCard(props) {
 
   const navigate = useNavigate()
 
-  function test(event) {
-    console.log(event.target.id)
-  }
-
   function editBlog(event) {
     const id = event.target.id
     navigate(`/blog/edit/${id}`)
+  }
+
+  function viewBlog(event) {
+    const id = event.target.id
+    navigate(`/blog/${id}`)
   }
 
   return (
@@ -24,7 +25,7 @@ function BlogCard(props) {
             <Card.Text>
             {props.description}
             </Card.Text>
-            <Button onClick = {test} id = {props.id} className = "mx-1" variant="primary">Read Blog</Button>
+            <Button onClick = {viewBlog} id = {props.id} className = "mx-1" variant="primary">Read Blog</Button>
             <Button onClick = {editBlog} id = {props.id} className = "mx-1" variant="primary">Edit</Button>
             <Button id = {props.id} className = "mx-1" variant="primary">Delete</Button>
         </Card.Body>
