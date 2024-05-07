@@ -3,7 +3,6 @@ import BlogRow from './components/blog-row';
 import BlogTitle from './components/blog-title';
 import Hero from './components/hero';
 import axios from 'axios'
-import BlogFeatures from './components/blog-features';
 
 // Replace with a database
 // const blogInfo = [
@@ -15,7 +14,7 @@ import BlogFeatures from './components/blog-features';
 function Home(props) {
 
     console.log(props)
-    
+
     const [blogInfo, setBlogInfo] = useState([{}])
 
     // Return the first three blogs
@@ -34,7 +33,7 @@ function Home(props) {
         <>
         <Hero />
         <BlogTitle />
-        <BlogRow view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
+        <BlogRow featured = {false} view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
         </>
     )
 
