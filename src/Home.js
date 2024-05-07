@@ -12,8 +12,10 @@ import BlogFeatures from './components/blog-features';
 //     {'imgName': "crypto", 'title': 'Test', 'description': 'This is a test'}
 // ]
 
-function Home() {
+function Home(props) {
 
+    console.log(props)
+    
     const [blogInfo, setBlogInfo] = useState([{}])
 
     // Return the first three blogs
@@ -32,7 +34,7 @@ function Home() {
         <>
         <Hero />
         <BlogTitle />
-        <BlogRow blogList = {blogInfo}/>
+        <BlogRow view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
         </>
     )
 
