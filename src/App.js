@@ -27,7 +27,7 @@ function App() {
       await axios.delete(`/blogs/${id}`)
     })
     ()
-    // window.location.reload()
+    window.location.reload()
   }
 
   // console.log(blogInfo)
@@ -36,7 +36,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path = "/" element = {<Home view = {viewBlog} edit = {editBlog} delete = {deleteBlog} />} />
-        <Route path = "/blog" element = {<Blog/ >} />
+        <Route path = "/blog" element = {<Blog view = {viewBlog} edit = {editBlog} delete = {deleteBlog} />} />
         <Route path = "/blog/new" element = {<BlogEntry/>} />
         <Route path = "/blog/edit/:id" element = {<BlogEntry/>} />
         <Route path = "/blog/:id" element = {<BlogPage />} />

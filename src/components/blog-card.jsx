@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import BlogButton from "./blog-button";
 
 function BlogCard(props) {
 
@@ -35,9 +36,9 @@ function BlogCard(props) {
             <Card.Text>
             {props.description}
             </Card.Text>
-            <Button onClick = {() => props.view(id)} id = {props.id} className = "mx-1" variant="primary" size = "sm">View</Button>
-            <Button onClick = {() => props.edit(id)} id = {props.id} className = "mx-1" variant="secondary" size = "sm">Edit</Button>
-            <Button onClick = {() => props.delete(id)} id = {props.id} className = "mx-1" variant="secondary" size = "sm">Delete</Button>
+            <BlogButton action = {props.view} id = {props.id} name = "View" />
+            <BlogButton action = {props.edit} id = {props.id} name = "Edit" />
+            <BlogButton action = {props.delete} id = {props.id} name = "Delete" />
         </Card.Body>
         </Card>
     </div>

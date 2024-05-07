@@ -5,7 +5,7 @@ import BlogFeatures from "./components/blog-features";
 import BlogHeader from "./components/blog-header";
 import BlogDropdown from "./components/blog-dropdown";
 
-function Blog() {
+function Blog(props) {
 
     const [blogInfo, setBlogInfo] = useState([{}])
 
@@ -24,7 +24,7 @@ function Blog() {
         <>
         <BlogHeader />
         <BlogDropdown />
-        <BlogFeatures blogList = {blogInfo}/>
+        <BlogFeatures view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
         </>
     )
 }
