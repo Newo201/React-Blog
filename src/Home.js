@@ -3,6 +3,7 @@ import BlogRow from './components/blog-row';
 import BlogTitle from './components/blog-title';
 import Hero from './components/hero';
 import axios from 'axios'
+import BlogFeatures from './components/blog-features';
 
 // Replace with a database
 // const blogInfo = [

@@ -2,6 +2,7 @@ import React from "react"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 function BlogCard(props) {
 
@@ -17,6 +18,14 @@ function BlogCard(props) {
     navigate(`/blog/${id}`)
   }
 
+  function deleteBlog(event) {
+    (async () => {
+      await axios.delete(`/blogs/${event.target.id}`)
+    })
+    ()
+    window.location.reload()
+  }
+
   return (
     <div className="col d-flex align-items-stretch">
         <Card style={{ width: '18rem' }}>
@@ -25,9 +34,9 @@ function BlogCard(props) {
             <Card.Text>
             {props.description}
             </Card.Text>
-            <Button onClick = {viewBlog} id = {props.id} className = "mx-1" variant="primary">Read Blog</Button>
-            <Button onClick = {editBlog} id = {props.id} className = "mx-1" variant="primary">Edit</Button>
-            <Button id = {props.id} className = "mx-1" variant="primary">Delete</Button>
+            <Button onClick = {viewBlog} id = {props.id} className = "mx-1" variant="primary" size = "sm">View</Button>
+            <Button onClick = {editBlog} id = {props.id} className = "mx-1" variant="secondary" size = "sm">Edit</Button>
+            <Button onClick = {deleteBlog} id = {props.id} className = "mx-1" variant="secondary" size = "sm">Delete</Button>
         </Card.Body>
         </Card>
     </div>

@@ -1,6 +1,9 @@
 import BlogRow from "./components/blog-row"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BlogFeatures from "./components/blog-features";
+import BlogHeader from "./components/blog-header";
+import BlogDropdown from "./components/blog-dropdown";
 
 function Blog() {
 
@@ -19,7 +22,9 @@ function Blog() {
 
     return (
         <>
-        <BlogRow blogList = {blogInfo}/>
+        <BlogHeader />
+        <BlogDropdown />
+        <BlogFeatures blogList = {blogInfo}/>
         </>
     )
 }

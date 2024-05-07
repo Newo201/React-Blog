@@ -65,7 +65,7 @@ function BlogEntry() {
     <div className = "container mt-5">
         <Form>
         <Form.Group className="mb-3" controlId="title">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Blog Title</Form.Label>
             <Form.Control onChange = {updateForm} name="title" placeholder="Blog Title" value = {blogInfo.title}/>
         </Form.Group>
         <Form.Group className = "mb-3" controlId = "Category">
@@ -90,7 +90,7 @@ function BlogEntry() {
             <Form.Control onChange = {updateForm} name = "description" as="textarea" rows={3} value = {blogInfo.description}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog article">
-            <Form.Label>Blog article</Form.Label>
+            <Form.Label>Blog Article</Form.Label>
             <Form.Control onChange = {updateForm} name = "article" as="textarea" rows={10} value = {blogInfo.article}/>
         </Form.Group>
         </Form>
