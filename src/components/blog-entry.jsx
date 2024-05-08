@@ -37,12 +37,12 @@ function BlogEntry() {
     
     ();
 
-  }, [])
+  }, [id])
 
   async function addBlog() {
     console.log(blogInfo)
     await axios.post("/blogs/new", blogInfo)
-    navigate(-1)
+    navigate("/")
   }
 
   async function updateBlog() {
@@ -84,6 +84,10 @@ function BlogEntry() {
                 />
             )
         })}
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="title">
+            <Form.Label>Blog Image</Form.Label>
+            <Form.Control onChange = {updateForm} name="image" placeholder="Copy the image URL from the browser" value = {blogInfo.img}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>

@@ -1,12 +1,16 @@
+// CSS
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
+// Components
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './Home';
-import { Route, Routes } from 'react-router-dom';
 import Blog from './Blog';
 import BlogEntry from './components/blog-entry';
 import BlogPage from './BlogPage';
+
+// Imports
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +31,7 @@ function App() {
       await axios.delete(`/blogs/${id}`)
     })
     ()
-    window.location.reload()
+    // window.location.reload()
   }
 
   // console.log(blogInfo)

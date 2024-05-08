@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import BlogRow from './components/blog-row';
 import BlogTitle from './components/blog-title';
 import Hero from './components/hero';
@@ -18,7 +18,7 @@ function Home(props) {
     const [blogInfo, setBlogInfo] = useState([{}])
 
     // Return the first three blogs
-    useEffect(() => {
+    useMemo(() => {
 
         (async () => {
             const response = await axios.get("blogs/featured")

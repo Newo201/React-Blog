@@ -31,6 +31,7 @@ function BlogCard(props) {
   return (
     <div className="col d-flex align-items-stretch">
         <Card style={{ width: '18rem' }}>
+        <Card.Img src = {props.image}/>
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>
             <Card.Text>
