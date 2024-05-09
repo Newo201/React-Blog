@@ -19,6 +19,7 @@ function BlogEntry() {
   const [blogInfo, setBlogInfo] = useState({
     "title": "", 
     "cat_id": 0,
+    "image": "",
     "category": "", 
     "description": "", 
     "article": ""
@@ -40,26 +41,40 @@ function BlogEntry() {
   }, [id])
 
   async function addBlog() {
-    console.log(blogInfo)
-    await axios.post("/blogs/new", blogInfo)
-    navigate("/")
+    (async () => {
+      try {
+        const response = await axios.post(`/blogs/new`, blogInfo)
+        console.log(response)
+        console.log('redirecting')
+        navigate(-1, {replace: true})
+      } catch (err) {
+        console.log(err)
+      }
+    }) ()
+    
   }
 
-  async function updateBlog() {
-    console.log(blogInfo)
-    await axios.put(`/blogs/${id}`, blogInfo)
-    navigate(-1)
+function updateBlog() {
+    (async () => {
+      try {
+        const response = await axios.put(`/blogs/${id}`, blogInfo)
+        console.log(response)
+        console.log('redirecting')
+        navigate(-1, {replace: true})
+      } catch (err) {
+        console.log(err)
+      }
+    })()
+    
   }
 
   function updateForm(event) {
     const {name, value} = event.target
-    console.log(name)
     setBlogInfo(prevValue => {
         return ({...prevValue, [name]: value})
     })
   }
 
-  console.log(blogInfo.cat_id)
 
   return (
     <div className = "container mt-5">
@@ -87,7 +102,7 @@ function BlogEntry() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="title">
             <Form.Label>Blog Image</Form.Label>
-            <Form.Control onChange = {updateForm} name="image" placeholder="Copy the image URL from the browser" value = {blogInfo.img}/>
+            <Form.Control onChange = {updateForm} name="image" placeholder="Copy the image URL from the browser" value = {blogInfo.image}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>

@@ -18,10 +18,10 @@ function BlogPage(props) {
     })
 
     return (
-        <div class = "container">
-            <h1>{blog.title}</h1>
-            <h6>{blog.description}</h6>
-            <p>{blog.article}</p>
+        <div className = "container py-5">
+            <h1 className = "my-3">{blog.title}</h1>
+            <h6 className = "my-3">{blog.description}</h6>
+            <p className = "my-3">{blog.article}</p>
         </div>
     )
 

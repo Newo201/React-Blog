@@ -11,7 +11,7 @@ function BlogRow(props) {
                 <div className={!(props.featured) && "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"}>
                     {props.blogList.map((blog, index) => {
                         return (props.featured ? 
-                        <BlogFeature key = {index} {...blog} /> : 
+                        <BlogFeature key = {index} {...blog} view = {props.view} edit = {props.edit} delete = {props.delete}/> : 
                         <BlogCard key = {index} {...blog} view = {props.view} edit = {props.edit} delete = {props.delete}/>)
                     })}
                 </div>
