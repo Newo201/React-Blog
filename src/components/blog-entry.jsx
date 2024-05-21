@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 // import BlogCategories from './blog-categories';
@@ -8,53 +8,44 @@ import { useNavigate, useParams } from 'react-router-dom';
 // Replace with database query
 const categories = ["Economics", "Finance", "Statistics"]
 
-function BlogEntry() {
+function BlogEntry(props) {
 
   const navigate = useNavigate()
-
   const { id } = useParams()
 
-  const [isUpdate, setIsUpdate] = useState(false)
-
-  const [blogInfo, setBlogInfo] = useState({
-    "title": "", 
-    "cat_id": 0,
-    "image": "",
-    "category": "", 
-    "description": "", 
-    "article": ""
+  //Return the blog which matches the current id
+  const [blogInfo, setBlogInfo] = useState(() => {
+    const backendBlog = props.allBlogs.filter(blog => parseInt(blog.id) === parseInt(id))[0]
+    //ToDo: clean up this code
+    if (backendBlog) {
+      return {...backendBlog, 'category': categories[backendBlog.cat_id - 1]}
+    }
+    else {
+      return [{}]
+    }
   })
 
-  useEffect(() => {
+  console.log(blogInfo)
 
-    (async () => {
-      if (id) {
-        const response = await axios.get(`/blogs/${id}`)
-        console.log(response)
-        setBlogInfo(response.data)
-        setIsUpdate(true)
-      }
-    })
-    
-    ();
-
-  }, [id])
-
-  async function addBlog() {
+  //Adds a blog to the database
+  //ToDo: figure out why the submit is not redirecting the user
+  //ToDo: add error catching if the user does not enter a category
+  function addBlog() {
     (async () => {
       try {
-        const response = await axios.post(`/blogs/new`, blogInfo)
+        const response = await axios.post("/blogs/new", blogInfo)
         console.log(response)
         console.log('redirecting')
         navigate(-1, {replace: true})
       } catch (err) {
         console.log(err)
+        navigate(-1, {replace: true})
       }
     }) ()
     
   }
 
-function updateBlog() {
+  function updateBlog() {
     (async () => {
       try {
         const response = await axios.put(`/blogs/${id}`, blogInfo)
@@ -113,7 +104,7 @@ function updateBlog() {
             <Form.Control onChange = {updateForm} name = "article" as="textarea" rows={10} value = {blogInfo.article}/>
         </Form.Group>
         </Form>
-        {isUpdate ?<Button onClick = {updateBlog}>Update</Button> :<Button onClick = {addBlog}>Submit</Button> }
+        {parseInt(id) ?<Button onClick = {updateBlog}>Update</Button> :<Button onClick = {addBlog}>Submit</Button> }
     </div>
   );
 }

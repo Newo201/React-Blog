@@ -6,24 +6,23 @@ import BlogDropdown from "./components/blog-dropdown";
 
 function Blog(props) {
 
-    const [blogInfo, setBlogInfo] = useState([{}])
+    // useEffect(() => {
 
-    useEffect(() => {
-
-        (async () => {
-            const response = await axios.get("blogs/all")
-            console.log(response)
-            setBlogInfo(response.data)
-        })
+    //     (async () => {
+    //         const response = await axios.get("blogs/all")
+    //         console.log(response)
+    //         setBlogInfo(response.data)
+    //     })
         
-        ();
-    }, [])
+    //     ();
+    // }, [])
 
     return (
         <>
         <BlogHeader />
         <BlogDropdown />
-        <BlogRow featured = {true} view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
+        <BlogRow featured = {true} view = {props.view} edit = {props.edit} 
+        delete = {props.delete} blogList = {props.allBlogs}/>
         </>
     )
 }

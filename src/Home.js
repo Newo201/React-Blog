@@ -13,27 +13,23 @@ import axios from 'axios'
 
 function Home(props) {
 
-    console.log(props)
-
-    const [blogInfo, setBlogInfo] = useState([{}])
-
     // Return the first three blogs
-    useMemo(() => {
+    // useMemo(() => {
 
-        (async () => {
-            const response = await axios.get("blogs/featured")
-            console.log(response)
-            setBlogInfo(response.data)
-        })
+    //     (async () => {
+    //         const response = await axios.get("blogs/featured")
+    //         console.log(response)
+    //         setBlogInfo(response.data)
+    //     })
         
-        ();
-    }, [])
+    //     ();
+    // }, [])
 
     return (
         <>
         <Hero />
         <BlogTitle />
-        <BlogRow featured = {false} view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {blogInfo}/>
+        <BlogRow featured = {false} view = {props.view} edit = {props.edit} delete = {props.delete} blogList = {props.allBlogs}/>
         </>
     )
 
