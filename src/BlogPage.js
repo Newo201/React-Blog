@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 function BlogPage(props) {
 
     const [blog, setBlog] = useState({})
-
     const { id } = useParams()
 
+    // Can probably remove this get request 
     useEffect(() => {
         (async () => {
             const response = await axios.get(`/blogs/${id}`)
@@ -24,8 +24,6 @@ function BlogPage(props) {
             <p className = "my-3">{blog.article}</p>
         </div>
     )
-
-
 }
 
 export default BlogPage

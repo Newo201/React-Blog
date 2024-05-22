@@ -36,12 +36,11 @@ function BlogEntry(props) {
         const response = await axios.post("/blogs/new", blogInfo)
         console.log(response)
         console.log('redirecting')
-        navigate(-1, {replace: true})
       } catch (err) {
         console.log(err)
-        navigate(-1, {replace: true})
       }
     }) ()
+    navigate(-1, {replace: true})
     
   }
 
@@ -51,11 +50,11 @@ function BlogEntry(props) {
         const response = await axios.put(`/blogs/${id}`, blogInfo)
         console.log(response)
         console.log('redirecting')
-        navigate(-1, {replace: true})
       } catch (err) {
         console.log(err)
       }
     })()
+    navigate(-1, {replace: true})
     
   }
 
