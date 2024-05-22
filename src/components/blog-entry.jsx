@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 // import BlogCategories from './blog-categories';
@@ -10,22 +10,36 @@ const categories = ["Economics", "Finance", "Statistics"]
 
 function BlogEntry(props) {
 
-  const navigate = useNavigate()
+  const [blog, setBlog] = useState({})
   const { id } = useParams()
+  const navigate = useNavigate()
 
-  //Return the blog which matches the current id
-  const [blogInfo, setBlogInfo] = useState(() => {
-    const backendBlog = props.allBlogs.filter(blog => parseInt(blog.id) === parseInt(id))[0]
-    //ToDo: clean up this code
-    if (backendBlog) {
-      return {...backendBlog, 'category': categories[backendBlog.cat_id - 1]}
-    }
-    else {
-      return [{}]
-    }
-  })
+  useEffect(() => {
+    (async () => {
+      if(id) {
+        const response = await axios.get(`/blogs/${id}`)
+        console.log(response)
+        setBlog(response.data)
+      }
+    })
+    ()
+  }, [id])
 
-  console.log(blogInfo)
+  
+
+  // //Return the blog which matches the current id
+  // const [blogInfo, setBlogInfo] = useState(() => {
+  //   const backendBlog = props.allBlogs.filter(blog => parseInt(blog.id) === parseInt(id))[0]
+  //   //ToDo: clean up this code
+  //   if (backendBlog) {
+  //     return {...backendBlog, 'category': categories[backendBlog.cat_id - 1]}
+  //   }
+  //   else {
+  //     return [{}]
+  //   }
+  // })
+
+  // console.log(blogInfo)
 
   //Adds a blog to the database
   //ToDo: figure out why the submit is not redirecting the user
@@ -33,7 +47,7 @@ function BlogEntry(props) {
   function addBlog() {
     (async () => {
       try {
-        const response = await axios.post("/blogs/new", blogInfo)
+        const response = await axios.post("/blogs/new", blog)
         console.log(response)
         console.log('redirecting')
       } catch (err) {
@@ -47,7 +61,7 @@ function BlogEntry(props) {
   function updateBlog() {
     (async () => {
       try {
-        const response = await axios.put(`/blogs/${id}`, blogInfo)
+        const response = await axios.put(`/blogs/${id}`, blog)
         console.log(response)
         console.log('redirecting')
       } catch (err) {
@@ -60,7 +74,7 @@ function BlogEntry(props) {
 
   function updateForm(event) {
     const {name, value} = event.target
-    setBlogInfo(prevValue => {
+    setBlog(prevValue => {
         return ({...prevValue, [name]: value})
     })
   }
@@ -71,7 +85,7 @@ function BlogEntry(props) {
         <Form>
         <Form.Group className="mb-3" controlId="title">
             <Form.Label>Blog Title</Form.Label>
-            <Form.Control onChange = {updateForm} name="title" placeholder="Blog Title" value = {blogInfo.title}/>
+            <Form.Control onChange = {updateForm} name="title" placeholder="Blog Title" value = {blog.title}/>
         </Form.Group>
         <Form.Group className = "mb-3" controlId = "Category">
         <Form.Label>Blog Category</Form.Label>
@@ -85,22 +99,22 @@ function BlogEntry(props) {
                 value={category}
                 label={category}
                 // isValid = {blogInfo.cat_id === 2}
-                checked = {blogInfo.category === category}
+                checked = {blog.category === category}
                 />
             )
         })}
         </Form.Group>
         <Form.Group className="mb-3" controlId="title">
             <Form.Label>Blog Image</Form.Label>
-            <Form.Control onChange = {updateForm} name="image" placeholder="Copy the image URL from the browser" value = {blogInfo.image}/>
+            <Form.Control onChange = {updateForm} name="image" placeholder="Copy the image URL from the browser" value = {blog.image}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>
-            <Form.Control onChange = {updateForm} name = "description" as="textarea" rows={3} value = {blogInfo.description}/>
+            <Form.Control onChange = {updateForm} name = "description" as="textarea" rows={3} value = {blog.description}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog article">
             <Form.Label>Blog Article</Form.Label>
-            <Form.Control onChange = {updateForm} name = "article" as="textarea" rows={10} value = {blogInfo.article}/>
+            <Form.Control onChange = {updateForm} name = "article" as="textarea" rows={10} value = {blog.article}/>
         </Form.Group>
         </Form>
         {parseInt(id) ?<Button onClick = {updateBlog}>Update</Button> :<Button onClick = {addBlog}>Submit</Button> }

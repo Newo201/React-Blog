@@ -18,8 +18,9 @@ import { useNavigate } from 'react-router-dom';
 function App() {
 
   const [allBlogs, setAllBlogs] = useState([{}])
+  const [deleteClicks, setDeleteClicks] = useState(0)
 
-  //Return all of the blogs from the API
+  // //Return all of the blogs from the API
   useEffect(() => {
 
         (async () => {
@@ -34,37 +35,36 @@ function App() {
   //Logic for editing, viewing and deleting blogs
   //ToDo: make these functions into a useReducer Hook
 
-  const navigateEdit = useNavigate()
-  const navigateView = useNavigate()
-
+  const navigate = useNavigate()
 
   function editBlog(id) {
-    navigateEdit(`/blog/edit/${id}`)
+    navigate(`/blog/edit/${id}`)
   }
 
   function viewBlog(id) {
-    navigateView(`/blog/${id}`, {exact: true})
+    navigate(`/blog/${id}`, {exact: true})
   }
 
-  function deleteBlog(id) {
+  function deleteBlog(id, setBlogState) {
     (async () => {
       await axios.delete(`/blogs/${id}`)
     })
     ()
-    setAllBlogs(prevBlogs => { 
-      return prevBlogs.filter(blog => blog.id !== id)
-    })
+    setDeleteClicks(prevCount => prevCount + 1)
+    // setBlogState(prevBlogs => { 
+    //   return prevBlogs.filter(blog => blog.id !== id)
+    // })
   }
 
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path = "/" element = {<Home view = {viewBlog} edit = {editBlog} delete = {deleteBlog} allBlogs = {allBlogs}/>} />
-        <Route path = "/blog" element = {<Blog view = {viewBlog} edit = {editBlog} delete = {deleteBlog} allBlogs = {allBlogs}/>} />
-        <Route path = "/blog/new" element = {<BlogEntry allBlogs = {allBlogs}/>} />
+        <Route path = "/" element = {<Home view = {viewBlog} edit = {editBlog} delete = {deleteBlog} clicks = {deleteClicks}/>} />
+        <Route path = "/blog" element = {<Blog view = {viewBlog} edit = {editBlog} delete = {deleteBlog} clicks = {deleteClicks}/>} />
+        <Route path = "/blog/new" element = {<BlogEntry/>} />
         <Route path = "/blog/:id" element = {<BlogPage />} />
-        <Route path = "/blog/edit/:id" element = {<BlogEntry allBlogs = {allBlogs}/>} />
+        <Route path = "/blog/edit/:id" element = {<BlogEntry/>} />
       </Routes>
       <Footer />
     </>

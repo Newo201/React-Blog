@@ -1,19 +1,30 @@
 import BlogRow from "./components/blog-row"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogHeader from "./components/blog-header";
 import BlogDropdown from "./components/blog-dropdown";
+import axios from "axios";
 
 function Blog(props) {
 
-    console.log("Hello")
-    console.log(props.allBlogs)
+    // console.log("Hello")
+    // console.log(props.allBlogs)
 
     const [filteredBlogs, setfilteredBlogs] = useState([{}])
     const [isFiltered, setIsFilterded] = useState(false)
 
-    // useEffect(() => {
-    //     setfilteredBlogs(props.allBlogs)
-    // })
+    const [allBlogs, setAllBlogs] = useState([{}])
+
+    //Return all of the blogs from the API
+    useEffect(() => {
+  
+          (async () => {
+              const response = await axios.get("/blogs/all")
+              console.log(response)
+              setAllBlogs(response.data)
+          })
+          
+          ();
+    }, [props.clicks])
 
     function filterBlogs(category) {
         if (category === "All") {
@@ -29,7 +40,7 @@ function Blog(props) {
         <BlogHeader />
         <BlogDropdown filterBlogs = {filterBlogs}/>
         <BlogRow featured = {true} view = {props.view} edit = {props.edit} 
-        delete = {props.delete} blogList = {isFiltered ? filteredBlogs: props.allBlogs}/>
+        delete = {props.delete} blogList = {isFiltered ? filteredBlogs: allBlogs}/>
         </>
     )
 }
