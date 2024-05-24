@@ -4,33 +4,34 @@ import './App.css';
 // Components
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import Home from './Home';
-import Blog from './Blog';
-import BlogEntry from './components/blog-entry';
-import BlogPage from './BlogPage';
-import { useState, useEffect } from 'react';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import BlogPage from './pages/BlogPage';
+import BlogEntry from './pages/BlogEntry';
+
 
 // Imports
+import { useState} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function App() {
 
-  const [allBlogs, setAllBlogs] = useState([{}])
+  // const [allBlogs, setAllBlogs] = useState([{}])
   const [deleteClicks, setDeleteClicks] = useState(0)
 
-  // //Return all of the blogs from the API
-  useEffect(() => {
+  // // //Return all of the blogs from the API
+  // useEffect(() => {
 
-        (async () => {
-            const response = await axios.get("/blogs/all")
-            console.log(response)
-            setAllBlogs(response.data)
-        })
+  //       (async () => {
+  //           const response = await axios.get("/blogs/all")
+  //           console.log(response)
+  //           setAllBlogs(response.data)
+  //       })
         
-        ();
-  }, [])
+  //       ();
+  // }, [])
 
   //Logic for editing, viewing and deleting blogs
   //ToDo: make these functions into a useReducer Hook

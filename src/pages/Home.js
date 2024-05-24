@@ -1,6 +1,6 @@
-import BlogRow from './components/blog-row';
-import BlogTitle from './components/blog-title';
-import Hero from './components/hero';
+import BlogRow from '../components/blog-row';
+import BlogTitle from '../components/blog-title';
+import Hero from '../components/hero';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 

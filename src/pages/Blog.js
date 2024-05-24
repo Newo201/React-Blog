@@ -1,7 +1,7 @@
-import BlogRow from "./components/blog-row"
+import BlogRow from "../components/blog-row";
 import { useState, useEffect } from "react";
-import BlogHeader from "./components/blog-header";
-import BlogDropdown from "./components/blog-dropdown";
+import BlogHeader from "../components/blog-header";
+import BlogDropdown from "../components/blog-dropdown";
 import axios from "axios";
 
 function Blog(props) {

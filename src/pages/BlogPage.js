@@ -15,7 +15,7 @@ function BlogPage(props) {
             setBlog(response.data)
         })
         ()
-    })
+    }, [id])
 
     return (
         <div className = "container py-5">
