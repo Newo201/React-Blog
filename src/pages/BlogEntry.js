@@ -26,41 +26,13 @@ function BlogEntry(props) {
   }, [id])
 
   
-
-  // //Return the blog which matches the current id
-  // const [blogInfo, setBlogInfo] = useState(() => {
-  //   const backendBlog = props.allBlogs.filter(blog => parseInt(blog.id) === parseInt(id))[0]
-  //   //ToDo: clean up this code
-  //   if (backendBlog) {
-  //     return {...backendBlog, 'category': categories[backendBlog.cat_id - 1]}
-  //   }
-  //   else {
-  //     return [{}]
-  //   }
-  // })
-
-  // console.log(blogInfo)
-
-  //Adds a blog to the database
-  //ToDo: figure out why the submit is not redirecting the user
   //ToDo: add error catching if the user does not enter a category
   function addBlog() {
 
     (async () => {
       try {
 
-        let formData = new FormData();
-        formData.append('title', blog.title);
-        formData.append('category', blog.category);
-        formData.append('description', blog.description);
-        formData.append('article', blog.article);
-        formData.append('image', blog.image);
-
-        const config = {     
-          headers: { 'content-type': 'multipart/form-data' }
-        }
-
-        const response = await axios.post("/blogs/new", formData, config)
+        const response = await axios.post("/blogs/new", blog)
         console.log(response)
         console.log('redirecting')
       } catch (err) {
@@ -88,23 +60,16 @@ function BlogEntry(props) {
   function updateForm(event) {
     const {name, value, files} = event.target
     console.log(files)
-    if (name === "image") {
-        const blog_img = URL.createObjectURL(files[0])
-        console.log(blog_img)
-        setBlog(prevValue => {
-          return ({...prevValue, "image": blog_img})
-        })
-    } else {
     setBlog(prevValue => {
         return ({...prevValue, [name]: value})
     })
-    }
   }
 
   console.log(blog)
 
 
   return (
+
     <div className = "container mt-5">
         <Form>
         <Form.Group className="mb-3" controlId="title">
@@ -130,7 +95,7 @@ function BlogEntry(props) {
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Blog Image</Form.Label>
-          <Form.Control type="file" name = "image" onChange = {updateForm}/>
+          <Form.Control type = "text" name = "image" placeholder = "Enter Image URL" onChange = {updateForm} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>
