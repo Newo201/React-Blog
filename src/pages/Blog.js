@@ -31,7 +31,7 @@ function Blog(props) {
             setIsFilterded(false)
         } else {
             setIsFilterded(true)
-            setfilteredBlogs(props.allBlogs.filter(blog => {return blog.category === category}))
+            setfilteredBlogs(allBlogs.filter(blog => {return blog.category === category}))
         }
     }
 

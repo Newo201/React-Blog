@@ -95,7 +95,7 @@ function BlogEntry(props) {
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Blog Image</Form.Label>
-          <Form.Control type = "text" name = "image" placeholder = "Enter Image URL" onChange = {updateForm} />
+          <Form.Control type = "text" name = "image" placeholder = "Enter Image URL" value = {blog.image} onChange = {updateForm} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="Blog Description">
             <Form.Label>Blog Description</Form.Label>

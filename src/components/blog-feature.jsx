@@ -14,7 +14,7 @@ function BlogFeature(props) {
             <BlogDescription title = {props.title} description = {props.description} />
             <BlogImg url = {props.image}/>
             </div> :
-            <div onClick = {() => {props.view(id)}} className="row py-5">
+            <div onClick = {() => {props.view(id)}} className="row text-end py-5">
             <BlogImg url = {props.image}/>
             <BlogDescription title = {props.title} description = {props.description} />
             </div>

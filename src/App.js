@@ -8,8 +8,6 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPage from './pages/BlogPage';
 import BlogEntry from './pages/BlogEntry';
-
-
 // Imports
 import { useState} from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -18,23 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 function App() {
 
-  // const [allBlogs, setAllBlogs] = useState([{}])
   const [deleteClicks, setDeleteClicks] = useState(0)
-
-  // // //Return all of the blogs from the API
-  // useEffect(() => {
-
-  //       (async () => {
-  //           const response = await axios.get("/blogs/all")
-  //           console.log(response)
-  //           setAllBlogs(response.data)
-  //       })
-        
-  //       ();
-  // }, [])
-
-  //Logic for editing, viewing and deleting blogs
-  //ToDo: make these functions into a useReducer Hook
 
   const navigate = useNavigate()
 
@@ -46,15 +28,12 @@ function App() {
     navigate(`/blog/${id}`, {exact: true})
   }
 
-  function deleteBlog(id, setBlogState) {
+  function deleteBlog(id) {
     (async () => {
       await axios.delete(`/blogs/${id}`)
     })
     ()
     setDeleteClicks(prevCount => prevCount + 1)
-    // setBlogState(prevBlogs => { 
-    //   return prevBlogs.filter(blog => blog.id !== id)
-    // })
   }
 
   return (
